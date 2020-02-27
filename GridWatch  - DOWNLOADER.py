@@ -27,6 +27,8 @@ import zipfile
 # ISSUES 
 # Need to add in price files
 
+#this changes the file for GIT, 
+
 
 def innerZipper(zip): 
     """ UNZIPS ONLY HOURLY DATA FROM INSIDE A ZIP"""
