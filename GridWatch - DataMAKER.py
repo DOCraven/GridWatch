@@ -11,6 +11,18 @@ from datetime import datetime
 from datetime import date
 
 
+#############################################
+#                                           #
+#               VERSION 1.0.0               #
+#                                           #   
+#                                           #
+#############################################
+### CHANGE LOG 
+#270220: Changed Version Number to 1.0 as per SEMVER (ie, first release)
+
+
+
+
 ######## NOTES ##########
 #please note, ALL TIMES MUST MATCH FOR CODE TO WORK
 # THERE IS NO ERROR CATCHING TO ENSURE THE TIMES ARE CORRECT. IT IS UP TO THE END USER TO ENSURE THE CORRECT FILES ARE DOWNLOADED AND TIMES AND DATES MATCH 

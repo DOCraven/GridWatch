@@ -20,10 +20,12 @@ import zipfile
 
 #############################################
 #                                           #
-#               VERSION 1.5.1               #
-#             RELEASE CANDIDATE             #   
+#               VERSION 1.0.0               #
+#                                           #   
 #                                           #
 #############################################
+### CHANGE LOG 
+#270220: Changed Version Number to 1.0 as per SEMVER (ie, first release)
 # ISSUES 
 # Need to add in price files
 
@@ -32,22 +34,21 @@ import zipfile
 
 def innerZipper(zip): 
     """ UNZIPS ONLY HOURLY DATA FROM INSIDE A ZIP"""
-    pattern = "(.*)00_(.*)"
+    pattern = "(.*)00_(.*)" #only find hourly data
     archive = zipfile.ZipFile(zip) #get names of the zipfile 
     
-    cwd = os.getcwd() + '\\'
+    cwd = os.getcwd() + '\\' #get cwd, needed to ensure portability 
     DL = cwd + '\\DL'
     
     with zipfile.ZipFile(zip) as z:
         for i, names in enumerate(archive.namelist()): #iterate through 
             result = re.search(pattern, names) #search for pattern
-            if result: 
+            if result: #pattern found 
                 with z.open(names) as zf, open(names, 'wb') as f:
                     shutil.copyfileobj(zf, f) #extracts to CWD, need to move it to DL
-                    # zf.extract(DL)
+                    
                 shutil.move(cwd + names, DL) #moves it to the DL folder
-            # time.sleep(0.01)
-            # printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+            
     
     return #nothing 
 
@@ -195,6 +196,7 @@ def fileFinder(URL, CALLER):
         return zip_files 
     
 def downloader(zip_files): 
+    """Downloads ZIP files, as found by fileFinder"""
 
     #get CWD
     cwd = os.getcwd()#get current dir
@@ -204,18 +206,9 @@ def downloader(zip_files):
     if not os.path.exists(download_folder): #make DL folder if it does not exist
         os.makedirs(download_folder)
 
-
-    # if LIMIT != 0: #therefore we want to limit files 
-    #     zip_files = zip_files[:LIMIT]
-
-   
     l = len(zip_files)
     printProgressBar(0, l, prefix = 'Progress:', suffix = 'Complete', length = 50) #initial 0 setup
 
-
-
-    
-    # stop = False
     for i, zip_file in enumerate(zip_files):
         
         # if LIMIT != 0: 
@@ -237,7 +230,6 @@ def downloader(zip_files):
         # if stop: #this is to stop the entire file downloading 
         #     break
 
-
     return #nothig
 
 def zipper(DL, SAVE_PATH, CALLER = "SCADA"):  #first level zipper, should only extract to DL folder 
@@ -246,7 +238,6 @@ def zipper(DL, SAVE_PATH, CALLER = "SCADA"):  #first level zipper, should only e
     """
 
     files = fileScanner(DL)
-    # TT = "(.*)00_(.*)" #only extract hourly data
     
     cwd = os.getcwd() + '\\'
     DLL = cwd + 'DL\\'
@@ -275,8 +266,6 @@ def zipperArchive(DL, SAVE_PATH, CALLER = "SCADA"): #2nd level zipper, extracts 
     files = fileScanner(DL)
     TT = "00_" #only extract hourly data
     pattern = "(.*)" + TT + "(.*)"
-
-    
     
     if CALLER == "SCADA":
         print('\nEXTRACTING SCADA ARCHIVE FILES')
@@ -298,8 +287,6 @@ def zipperArchive(DL, SAVE_PATH, CALLER = "SCADA"): #2nd level zipper, extracts 
                 pass
             time.sleep(0.01)
             printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
-
-
     elif CALLER == "DEMAND":
 
         print('\nEXTRACTING DEMAND ARCHIVE FILES\nProgress Bar is Wonky')
@@ -325,7 +312,6 @@ def zipperArchive(DL, SAVE_PATH, CALLER = "SCADA"): #2nd level zipper, extracts 
                 pass
             time.sleep(0.01)
             printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
-
     elif CALLER == "PRICE":
 
         print('\nEXTRACTING PRICE ARCHIVE FILES\nProgress Bar is Wonky')
@@ -355,16 +341,12 @@ def zipperArchive(DL, SAVE_PATH, CALLER = "SCADA"): #2nd level zipper, extracts 
     return #nothing 
 
 def folderCleaner(PATH):
-    shutil.rmtree(PATH)
+    """Removes all files in the path given"""
 
-    # files = fileScanner(PATH)
-    # toDelete = files[:-24]
-    # for item in toDelete: 
-    #     name = PATH + "\\" + item
-    #     try: 
-    #         os.remove(name)
-    #     except FileNotFoundError: 
-    #         pass
+    shutil.rmtree(PATH)
+    return #nothing 
+
+
 
 def postFinder(DL): 
     """ Aligns DEMAND DATASET to the SCADA DATASET, DELETING ANYTHING THAT IS OUTSIDE OF THAT """
@@ -467,7 +449,7 @@ def downloadOrganiser():
     # print("\nDELETING DEMAND FILES")
     deleter(download_folder)
 
-    ### STEP 7 - download PRICE FILES (DISABLED FOR NOW)
+    ### STEP 7 - download PRICE FILES (DISABLED FOR V1.0.0)
 
     # print("\nDOWNLOADING PRICE FILES")
     # CALLER = 'PRICE'
