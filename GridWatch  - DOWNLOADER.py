@@ -11,7 +11,7 @@ import time
 import subprocess
 
 from datetime import datetime
-from bs4 import BeautifulSoup`
+from bs4 import BeautifulSoup
 from os import walk
 from zipfile import ZipFile
 import zipfile 
@@ -20,7 +20,7 @@ import zipfile
 
 #############################################
 #                                           #
-#               VERSION 1.0.0               #
+#               VERSION 1.0.1               #
 #                                           #   
 #                                           #
 #############################################
