@@ -18,7 +18,7 @@ from datetime import date
 #                                           #
 #############################################
 ### CHANGE LOG 
-#270220: Changed Version Number to 1.0 as per SEMVER (ie, first release)
+#270220: Changed Version Number to 1.0 as per SEMVER (ie, first release) 
 
 
 

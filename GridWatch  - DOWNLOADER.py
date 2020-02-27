@@ -26,6 +26,8 @@ import zipfile
 #############################################
 ### CHANGE LOG 
 #270220: Changed Version Number to 1.0 as per SEMVER (ie, first release)
+
+
 # ISSUES 
 # Need to add in price files
 
@@ -85,7 +87,13 @@ def dateSelector(FILES):
     selLast = "NONE"
 
 
-    print('PLEASE SELECT A DATE BETWEEN %s AND %s\nPRESS ENTER TO DOWNLOAD ALL AVAILABLE DATES\nFORMAT IS YYYYMMDD' %(first, last)) #maybe change later
+    print('PLEASE SELECT A DATE BETWEEN %s AND %s\nPLEASE VERIFY DATES AT WEBSITE\nPRESS ENTER TO DOWNLOAD ALL AVAILABLE DATES\n\nFORMAT IS YYYYMMDD' %(first, last)) #maybe change later
+    #open NEMWEB archive to ensure dates are cross referenced
+    SCADAurl = 'http://nemweb.com.au/Reports/Archive/Dispatch_SCADA/' #SCADA ARCHIVE
+    DEMANDurl = 'http://nemweb.com.au/Reports/Archive/Operational_Demand/Actual_HH/' #DEMAND ARCHIVE
+    webbrowser.open(SCADAurl)
+    webbrowser.open(DEMANDurl)
+    
     while True: 
         selFirst = input("\nSTART DATE: ") #first date
         selFirst = selFirst.upper() #sanitise input 
