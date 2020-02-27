@@ -1,5 +1,5 @@
 NEMWEB DATA SCRAPER
-V1.5.1
+V1.0.2
 RELEASE CANDIDATE
 README LAST UPDATED 21022020
 #############################################################
